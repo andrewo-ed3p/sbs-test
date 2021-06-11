@@ -12,14 +12,14 @@ RUN apk --no-cache add \
 RUN ln -s /usr/bin/php8 /usr/bin/php
 
 # Configure nginx
-COPY config/nginx.conf /etc/nginx/nginx.conf
+COPY --chown=nobody config/nginx.conf /etc/nginx/nginx.conf
 
 # Configure PHP-FPM
-COPY config/fpm-pool.conf /etc/php8/php-fpm.d/www.conf
-COPY config/php.ini /etc/php8/conf.d/custom.ini
+COPY --chown=nobody config/fpm-pool.conf /etc/php8/php-fpm.d/www.conf
+COPY --chown=nobody config/php.ini /etc/php8/conf.d/custom.ini
 
 # Configure supervisord
-COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY --chown=nobody config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Setup document root
 RUN mkdir -p /var/www/html
