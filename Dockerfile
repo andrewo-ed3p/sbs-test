@@ -31,7 +31,7 @@ RUN chown -R nobody.nobody /var/www/html && \
   chown -R nobody.nobody /var/log/nginx
 
 # Switch to use a non-root user from here on
-# USER nobody
+USER nobody
 
 # Add application
 WORKDIR /var/www/html
@@ -41,7 +41,7 @@ COPY --chown=nobody src/ /var/www/html/
 VOLUME /data
 
 # Expose the port nginx is reachable on
-EXPOSE 80
+EXPOSE 8080
 
 # Let supervisord start nginx & php-fpm
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
