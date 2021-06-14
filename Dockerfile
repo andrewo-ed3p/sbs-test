@@ -50,4 +50,6 @@
 #HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8080/fpm-ping
 
 FROM s390x/nginx
-#COPY static-html-directory /usr/share/nginx/html
+EXPOSE 80
+EXPOSE 443
+
