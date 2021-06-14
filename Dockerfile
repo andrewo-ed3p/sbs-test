@@ -31,17 +31,20 @@ RUN chown -R nobody.nobody /var/www/html && \
   chown -R nobody.nobody /var/log/nginx
 
 # Switch to use a non-root user from here on
-USER nobody
+# USER nobody
 
 # Add application
 WORKDIR /var/www/html
 COPY --chown=nobody src/ /var/www/html/
 
+# Data volume of HP VS
+VOLUME /data
+
 # Expose the port nginx is reachable on
-EXPOSE 8080
+EXPOSE 80
 
 # Let supervisord start nginx & php-fpm
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/usr/bin/supervisord"]
 
 # Configure a healthcheck to validate that everything is up&running
 #HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8080/fpm-ping
